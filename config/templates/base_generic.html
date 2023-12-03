@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Secure Lending System</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      #topmenu {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+      }
+  
+      #top-menu-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+  
+      #top-menu-nav h1 {
+        margin: 0;
+      }
+  
+      #top-menu-nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+  
+      #top-menu-nav a:hover {
+        background-color: #555;
+      }
+
+      #content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="topmenu">
+      {% block topmenu %}
+      <nav id="top-menu-nav">
+        <h1>Secure Lending System</h1>
+        <a href="/accounts/login/">Login</a>
+      </nav>
+      {% endblock %}
+    </div>
+
+    <div id="content">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+  </body>
+</html>
