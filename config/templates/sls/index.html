@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container balance">
+    <label for="balance">Balance: </label>
+    <input type="text" id="balance" name="balance" value="{{ user.balance }}" readonly>
+</div>
+
+{% endblock %}

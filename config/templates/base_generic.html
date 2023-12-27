@@ -8,7 +8,7 @@
         padding: 0;
         font-family: Arial, sans-serif;
       }
-
+      
       #topmenu {
         background-color: #333;
         color: #fff;
@@ -16,17 +16,17 @@
         text-align: center;
         width: 100%;
       }
-  
+      
       #top-menu-nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-  
+      
       #top-menu-nav h1 {
         margin: 0;
       }
-  
+      
       #top-menu-nav a {
         color: #fff;
         text-decoration: none;
@@ -34,11 +34,11 @@
         border-radius: 4px;
         transition: background-color 0.3s;
       }
-  
+      
       #top-menu-nav a:hover {
         background-color: #555;
       }
-
+      
       #content {
         padding: 20px;
       }
@@ -47,10 +47,10 @@
   <body>
     <div id="topmenu">
       {% block topmenu %}
-      <nav id="top-menu-nav">
-        <h1>Secure Lending System</h1>
-        <a href="/accounts/login/">Login</a>
-      </nav>
+        <nav id="top-menu-nav">
+          <h1><a href="/">Secure Lending System</a></h1>
+          <a href="/accounts/login/">Login</a>
+        </nav>
       {% endblock %}
     </div>
 

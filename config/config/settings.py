@@ -40,8 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'defender',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    # 'defender',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,7 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'defender.middleware.FailedLoginMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    # 'defender.middleware.FailedLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -134,3 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'sls.User'
 
 DEFENDER_LOCKOUT_COOLOFF_TIME = [60, 120, 180, 300, 600, 900, 1800, 3600]
+
+LOGIN_URL = 'two_factor:login'
+LOGIN_REDIRECT_URL = '/'
+TWO_FACTOR_PATCH_ADMIN = False
+TWO_FACTOR_WEBAUTHN_RP_NAME = 'SLS'
+LOGOUT_REDIRECT_URL = '/'
