@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<h1>Transfers history</h1>
+
+{% if transfers %}
+    <table>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Account number</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+        {% for transfer in transfers %}
+        <tr>
+            <td>{{ transfer.userFrom }}</td>
+            <td>{{ transfer.userToName }}</td>
+            <td>{{ transfer.userTo.account_number }}</td>
+            <td>{{ transfer.title }}</td>
+            <td>{{ transfer.amount }}</td>
+            <td>{{ transfer.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No transfers are available.</p>
+{% endif %}
+
+{% endblock %}
+```

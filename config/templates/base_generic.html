@@ -14,7 +14,7 @@
         color: #fff;
         padding: 10px;
         text-align: center;
-        width: 100%;
+        width: 99%;
       }
       
       #top-menu-nav {
@@ -49,7 +49,17 @@
       {% block topmenu %}
         <nav id="top-menu-nav">
           <h1><a href="/">Secure Lending System</a></h1>
-          <a href="/accounts/login/">Login</a>
+          {% if user.is_authenticated %}
+          <a href="/transfer/">New Transfer</a>
+          <a href="/transfer_history/">Transfer History</a>
+          <a href="/personal_info/">Personal Info</a>
+          <div>
+            <p>Hello, {{ user.username }}</p>
+            <a href="/account/logout/">Logout</a>
+          </div>
+          {% else %}
+            <a href="/account/login/">Login</a>
+          {% endif %}
         </nav>
       {% endblock %}
     </div>

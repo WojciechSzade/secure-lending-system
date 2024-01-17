@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
+FIELD_ENCRYPTION_KEY = config("FIELD_ENCRYPTION_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'two_factor',
     'crispy_forms',
     'crispy_bootstrap5',
-    # 'defender',
+    'encrypted_model_fields',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -61,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    # 'defender.middleware.FailedLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -142,8 +142,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'sls.User'
-
-DEFENDER_LOCKOUT_COOLOFF_TIME = [60, 120, 180, 300, 600, 900, 1800, 3600]
 
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/'

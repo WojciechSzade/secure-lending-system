@@ -2,10 +2,13 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
-
+<div class="account-number">
 <div class="container balance">
     <label for="balance">Balance: </label>
     <input type="text" id="balance" name="balance" value="{{ user.balance }}" readonly>
+</br>
+    <label for="last_transaction">Last Transaction: </label>
+    <input type="text" id="last_transaction" name="last_transaction" value="{{ last_transaction }}" readonly size=50>
 </div>
 
 {% endblock %}

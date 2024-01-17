@@ -1,0 +1,44 @@
+{% extends 'two_factor/_base_focus.html' %}
+{% load i18n %}
+{% load two_factor_tags %}
+
+{% block content %}
+<style>
+  .main {
+    margin: 0 auto;
+    width: 20%;
+    padding: 10px;
+    border-radius: 5px;
+  }
+</style>
+<div class="main">
+  {% if user.is_authenticated %}
+    <p>
+      {% blocktrans %}You are already logged in as {{ user }}.{% endblocktrans %}
+    </p>
+    <p>
+      Do you want to <a href="/account/logout/">logout</a>?
+    </p>
+  {% else %}
+    <h1>
+      {% block title %}
+        {% trans 'Login' %}
+      {% endblock %}
+    </h1>
+
+    {% if wizard.steps.current == 'auth' %}
+      <p>
+        {% blocktrans %}Enter your credentials.{% endblocktrans %}
+      </p>
+    {% elif wizard.steps.current == 'token' %}
+      <p>{{ device|as_verbose_action }}</p>
+    {% endif %}
+
+    <form action="" method="post">
+      {% csrf_token %}
+      {% include 'two_factor/_wizard_forms.html' %}
+      <input type="submit" value="Login" />
+    </form>
+  {% endif %}
+</div>
+{% endblock %}
