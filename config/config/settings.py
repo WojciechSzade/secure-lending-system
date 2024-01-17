@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'encrypted_model_fields',
+    'axes',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -62,6 +63,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_otp.middleware.OTPMiddleware',
+    'axes.middleware.AxesMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -148,3 +155,15 @@ LOGIN_REDIRECT_URL = '/'
 TWO_FACTOR_PATCH_ADMIN = False
 TWO_FACTOR_WEBAUTHN_RP_NAME = 'SLS'
 LOGOUT_REDIRECT_URL = '/'
+OTP_LOGIN_URL = '/account/login/'
+
+AXES_ENABLED = True
+AXES_FAILURE_LIMIT = 5
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_ENABLE_ACCESS_FAILURE_LOG = True
+AXES_RESET_ON_SUCCESS = True
+AXES_COOLOFF_TIME = 0.5
+AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"

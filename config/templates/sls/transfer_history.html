@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Transfers history</h1>
-
+{% autoescape on %}
 {% if transfers %}
     <table>
         <tr>
@@ -27,6 +27,6 @@
 {% else %}
     <p>No transfers are available.</p>
 {% endif %}
-
+{% endautoescape %}
 {% endblock %}
 ```

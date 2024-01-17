@@ -7,27 +7,43 @@ from django.forms import ValidationError
 from encrypted_model_fields.fields import EncryptedCharField
 
 
+def create_new_unique_number_for_user(length, name):
+    for i in range(0, 100):
+        unique_number = random.randint(10**(length-1), 10**length-1)
+        filter_kwargs = {name: unique_number}
+        if not User.objects.filter(**filter_kwargs).exists():
+            break
+    else:
+        raise Exception(f"Can't create a unique {name} for User")
+    return str(unique_number)
 
-class User(AbstractUser):    
-    def create_new_account_number():
-        for i in range(0, 100):                   
-            unique_account_number = random.randint(1000, 9999)
-            if not User.objects.filter(account_number=unique_account_number).exists():
-                break
-        else:
-            raise Exception("Can't create a unique referrence number")
-        return str(unique_account_number)
-    
-    def create_new_card_number():
-        return random.randint(1000000000000000, 9999999999999999)
-    
-    def create_new_personal_id():
-        return random.randint(100000000, 999999999)
-        
+
+def create_new_unique_number_for_secret_info(length, name):
+    for i in range(0, 100):
+        unique_number = random.randint(10**(length-1), 10**length-1)
+        filter_kwargs = {name: unique_number}
+        if not SecretInfo.objects.filter(**filter_kwargs).exists():
+            break
+    else:
+        raise Exception(f"Can't create a unique {name} for SecretInfo")
+    return str(unique_number)
+
+
+class User(AbstractUser):
     balance = models.IntegerField(default=100)
-    account_number = models.CharField(default=create_new_account_number, unique=True, max_length=4)
-    card_number = EncryptedCharField(max_length=16, default=create_new_account_number)
-    personal_id = EncryptedCharField(max_length=9, default=create_new_personal_id)
+    account_number = models.CharField(
+        unique=True, max_length=4, default=lambda: create_new_unique_number_for_user(4, "account_number"))
+
+    def generate_secret_info(self):
+        SecretInfo.objects.create(user=self)
+
+
+class SecretInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    card_number = EncryptedCharField(
+        unique=True, max_length=16, default=lambda: create_new_unique_number_for_secret_info(16, "card_number"))
+    personal_id = EncryptedCharField(
+        unique=True, max_length=9, default=lambda: create_new_unique_number_for_secret_info(9, "personal_id"))
 
 
 class Transfer(models.Model):
@@ -35,7 +51,7 @@ class Transfer(models.Model):
         if not User.objects.filter(account_number=value).exists():
             raise ValidationError(
                 f"User with account number {value} does not exist")
-    
+
     userFrom = models.ForeignKey(
         User, to_field="account_number", on_delete=models.DO_NOTHING, related_name='userFrom')
     userTo = models.ForeignKey(

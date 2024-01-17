@@ -39,6 +39,21 @@
       {% include 'two_factor/_wizard_forms.html' %}
       <input type="submit" value="Login" />
     </form>
+    {% block 'backup_tokens' %}
+    {% if backup_tokens %}
+       <hr>
+       <div class="backup_tokens_form">
+       <form action="" method="post">
+           {% csrf_token %}
+            <p>{% trans "As a last resort, you can use a backup token:" %}</p>
+            <p>
+                <button name="wizard_goto_step" type="submit" value="backup"
+                    class="btn btn-sm btn-secondary btn-block">{% trans "Use Backup Token" %}</button>
+            </p>
+       </form>
+       </div>
+    {% endif %}
+  {% endblock %}
   {% endif %}
 </div>
 {% endblock %}

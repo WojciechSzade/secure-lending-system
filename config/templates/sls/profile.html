@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<h1>Personal information</h1>
+{% autoescape on %}
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" value="{{ user.username }}" disabled><br>
+<label for="email">Email:</label>
+<input type="text" id="email" name="email" value="{{ user.email }}" disabled><br>
+<label for="account_number">Account number:</label>
+<input type="text" id="account_number" name="account_number" value="{{ user.account_number }}" disabled><br>
+{% if show_secrets == 1 %}
+<p>Secret personal information:</p>
+<label for="personal_id">Personal ID:</label>
+<input type="text" id="personal_id" name="personal_id" value="{{ secret_info.personal_id }}" disabled><br>
+<label for="card_number">Card number:</label>
+<input type="text" id="card_number" name="card_number" value="{{ secret_info.card_number }}" disabled><br>
+<a href="{% url "profile" %}">Hide secret personal information</a><br>
+{% else %}
+<a href="{% url "profile" 1 %}">Show secret personal information</a><br>
+{% endif %}
+<a href="{% url 'change_password' %}">Change password</a><br>
+<a href="{% url 'two_factor:profile' %}">Manage two factor authorization</a>
+{% endautoescape %}
+
+{% endblock %}
