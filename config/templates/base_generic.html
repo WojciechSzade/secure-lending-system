@@ -58,8 +58,10 @@
             <a href="{% url "logout" %}">Logout</a>
           </div>
           {% else %}
+          <div>
             <a href="{% url "two_factor:login" %}">Login</a>
             <a href="{% url "register" %}">Register</a>
+          </div>
           {% endif %}
         </nav>
       {% endblock %}

@@ -5,6 +5,7 @@ import random
 from django.core.validators import MinValueValidator
 from django.forms import ValidationError
 from encrypted_model_fields.fields import EncryptedCharField
+from django.utils.translation import gettext_lazy as _
 
 
 def create_new_unique_number_for_user(length, name):
@@ -30,6 +31,7 @@ def create_new_unique_number_for_secret_info(length, name):
 
 
 class User(AbstractUser):
+    email = models.EmailField(_("email address"), unique=True)
     balance = models.IntegerField(default=100)
     account_number = models.CharField(
         unique=True, max_length=4, default=lambda: create_new_unique_number_for_user(4, "account_number"))

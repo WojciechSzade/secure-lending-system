@@ -4,7 +4,7 @@
 {% block content %}
   <h1>{% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}</h1>
   <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This
-    weakens your account security, are you sure?{% endblocktrans %}</p>
+should only be used to reset your 2FA method, as you would not be able to use the app without 2FA.{% endblocktrans %}</p>
   <form method="post">
     {% csrf_token %}
     <table>{{ form.as_table }}</table>

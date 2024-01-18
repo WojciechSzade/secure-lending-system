@@ -77,8 +77,10 @@ def change_password(request):
     context = {
         'user': request.user,
         'form': form,
+        'title': "Change password",
+        'button_text': "Change password",
     }
-    return render(request, 'sls/change_password.html', context=context)
+    return render(request, 'sls/form.html', context=context)
 
 
 def reset_password(request):
@@ -90,8 +92,10 @@ def reset_password(request):
     context = {
         'user': request.user,
         'form': form,
+        'title': "Reset password",
+        'button_text': "Reset password",
     }
-    return render(request, 'sls/reset_password.html', context=context)
+    return render(request, 'sls/form.html', context=context)
             
 
 
@@ -110,8 +114,10 @@ def transfer(request):
     context = {
         'user': request.user,
         'form': form,
+        'title': "Make a transfer",
+        'button_text': "Transfer",
     }
-    return render(request, 'sls/transfer.html', context=context)
+    return render(request, 'sls/form.html', context=context)
 
 
 @if_not_otp_but_authenticated

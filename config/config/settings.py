@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY")
 FIELD_ENCRYPTION_KEY = config("FIELD_ENCRYPTION_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -166,7 +166,7 @@ AXES_COOLOFF_TIME = 0.5
 AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+EMAIL_FILE_PATH = BASE_DIR / "../emails"
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost']
 

@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["waitress-serve", "--port=8000", "your_project_name.wsgi:application"]
+CMD ["waitress-serve", "--port=8000", "config.wsgi:application"]
