@@ -64,7 +64,7 @@ def logout_view(request):
         logout(request)
         return render(request, 'two_factor/logged_out.html')
     else:
-        return redirect(LoginView.as_view())
+        return redirect('/account/login/')
 
 
 @if_not_otp_but_authenticated
