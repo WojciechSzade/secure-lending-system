@@ -18,6 +18,20 @@ Clone the repo
 `https://github.com/WojciechSzade/secure-lending-system.git`   
 Change directory to config  
 `cd config`  
+Here you should supply an .env file with your secret key and field encryption key.  
+It should look something like that:  
+```
+# config/.env  
+SECRET_KEY=django-insecure-your-secret-key  
+FIELD_ENCRYPTION_KEY=your-generated-key  
+```
+For generating field encryption key you can use:
+```  
+import base64  
+import os  
+  
+new_key = base64.urlsafe_b64encode(os.urandom(32)).decode('utf-8')  
+```  
 Docker compose  
 `docker compose up`  
 Your app should be running on "https://localhost".  
