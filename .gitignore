@@ -1,3 +1,7 @@
 __pycache__/
 .venv
 .env
+db.sqlite3
+emails/
+.gitignore
+config/db.sqlite3

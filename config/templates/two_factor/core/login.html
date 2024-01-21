@@ -39,6 +39,7 @@
       {% include 'two_factor/_wizard_forms.html' %}
       <input type="submit" value="Login" />
     </form>
+      <p>Forgot your password? <a href="{% url "reset_password" %}">Reset password</a></p>
     {% block 'backup_tokens' %}
     {% if backup_tokens %}
        <hr>
